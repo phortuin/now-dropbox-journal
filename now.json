@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "env": {
+    "DROPBOX_APP_KEY": "@dropbox_app_key",
+    "DROPBOX_APP_SECRET": "@dropbox_app_secret"
+  },
+  "builds": [
+    { "src": "api/index.js", "use": "@now/node" },
+    { "src": "api/auth.js", "use": "@now/node" }
+  ],
+  "routes": [
+    { "src": "/", "methods":["GET"],  "dest": "/api/index.js" },
+    { "src": "/auth", "methods":["GET"],  "dest": "/api/auth.js" }
+  ]
+}

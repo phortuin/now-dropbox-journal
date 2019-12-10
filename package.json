@@ -1,0 +1,16 @@
+{
+  "name": "now-dropbox-journal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:now": "now dev"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dropbox": "4.0.30",
+    "node-fetch": "2.6.0",
+    "now": "16.4.4"
+  }
+}
