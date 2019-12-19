@@ -19,7 +19,7 @@
     "build:js": "rollup --config",
     "build:static": "ncp src/static public",
     "dev": "run-p dev:*",
-    "dev:now": "now dev --port 3031",
+    "dev:now": "now dev --listen 3031",
     "dev:watch": "run-p watch:*",
     "watch:js": "rollup --config --watch"
   },
