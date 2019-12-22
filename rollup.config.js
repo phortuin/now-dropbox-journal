@@ -7,16 +7,12 @@ export default {
 		sourcemap: true,
 		format: 'iife',
 		name: 'app',
-		file: 'public/bundle.js'
+		file: 'public/bundle.js',
 	},
 	plugins: [
 		svelte({
-			include: 'src/components/**/*.svelte',
 			css: css => css.write('public/index.css')
 		}),
-		resolve()
+		resolve(),
 	],
-	watch: {
-		clearScreen: false
-	}
 }
