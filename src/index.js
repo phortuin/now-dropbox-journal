@@ -1,10 +1,5 @@
-import App from './components/app/app.svelte';
+import App from './components/app.svelte'
 
 const app = new App({
-	target: document.getElementById('main'),
-	props: {
-		name: 'world'
-	}
-});
-
-export default app;
+	target: document.querySelector('[role=main]')
+})
