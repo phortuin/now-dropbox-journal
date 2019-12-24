@@ -4,16 +4,8 @@
     "DROPBOX_APP_KEY": "@dropbox_app_key",
     "DROPBOX_APP_SECRET": "@dropbox_app_secret"
   },
-  "builds": [
-    { "src": "public/**", "use": "@now/static" },
-    { "src": "api/index.js", "use": "@now/node" },
-    { "src": "api/auth.js", "use": "@now/node" }
+  "rewrites": [
+    { "source": "/(.+)", "destination": "/index.html" }
   ],
-  "routes": [
-    { "src": "/", "dest": "/public/index.html" },
-    { "src": "/api/", "methods":["GET"],  "dest": "/api/index.js" },
-    { "src": "/api/auth", "methods":["GET"],  "dest": "/api/auth.js" },
-    { "src": "/static/(.+)", "dest": "/public/$1" },
-    { "src": "/(.+)", "dest": "/public/index.html" }
-  ]
+  "trailingSlash": false
 }

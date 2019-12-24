@@ -14,25 +14,19 @@
     "node": ">=8"
   },
   "scripts": {
-    "prebuild": "rimraf public && mkdirp public",
     "build": "run-s build:*",
     "build:js": "rollup --config",
     "build:static": "ncp src/static public",
-    "dev": "run-p dev:*",
-    "dev:now": "now dev --listen 3031",
-    "dev:watch": "run-p watch:*",
-    "watch:js": "rollup --config --watch"
+    "dev:now": "now dev --listen 3031"
   },
   "dependencies": {
     "dropbox": "^4.0.30",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
-    "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
     "now": "^16.7.0",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^3.0.0",
     "rollup": "^1.27.13",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.1.1",
