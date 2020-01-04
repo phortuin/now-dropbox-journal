@@ -1,5 +1,6 @@
 import svelte from 'rollup-plugin-svelte'
 import resolve from 'rollup-plugin-node-resolve'
+import css from 'rollup-plugin-css-only'
 
 export default {
 	input: 'src/index.js',
@@ -11,8 +12,9 @@ export default {
 	},
 	plugins: [
 		svelte({
-			css: css => css.write('public/styles.css')
+			emitCss: true,
 		}),
 		resolve(),
+		css({ output: 'public/styles.css' })
 	],
 }

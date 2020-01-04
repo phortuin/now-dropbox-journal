@@ -28,6 +28,7 @@
     "now": "^16.7.0",
     "npm-run-all": "^4.1.5",
     "rollup": "^1.27.13",
+    "rollup-plugin-css-only": "^2.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.1.1",
     "svelte": "^3.16.5"
