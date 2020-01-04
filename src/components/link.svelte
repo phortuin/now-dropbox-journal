@@ -1,12 +1,10 @@
 <script>
-	import { activeRoute } from './stores.js'
-
-	export let href
+	import router from './router.js'
 	let props
 
-	function redirectTo(event) {
-		$activeRoute = event.target.pathname
-		window.history.pushState({ href }, '', `${window.location.origin}${href}`)
+	function handleClick(event) {
+		const path = event.target.pathname
+		router.redirect(path)
 	}
 
 	$: {
@@ -14,8 +12,10 @@
 		href = props.href
 		delete props.href
 	}
+
+	export let href
 </script>
 
-<a href={href} {...props} on:click|preventDefault={ redirectTo }>
+<a href={href} {...props} on:click|preventDefault={ handleClick }>
 	<slot />
 </a>

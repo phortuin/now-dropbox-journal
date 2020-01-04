@@ -1,13 +1,13 @@
 import { activeRoute } from './stores.js'
 
-function setRouteStore(path) {
-	activeRoute.set(path)
-}
-
 const router = {
 	start() {
-		setRouteStore(window.location.pathname)
-		window.onpopstate = () => setRouteStore(window.location.pathname)
+		activeRoute.set(window.location.pathname)
+		window.onpopstate = () => activeRoute.set(window.location.pathname)
+	},
+	redirect(path) {
+		activeRoute.set(path)
+		window.history.pushState({ path }, '', path)
 	}
 }
 
