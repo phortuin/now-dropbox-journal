@@ -5,6 +5,7 @@
     "DROPBOX_APP_SECRET": "@dropbox_app_secret"
   },
   "rewrites": [
+    { "source": "/api/(.+)", "destination": "/api/$1.js" },
     { "source": "/(.+)", "destination": "/index.html" }
   ],
   "trailingSlash": false
