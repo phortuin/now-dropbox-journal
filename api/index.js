@@ -1,45 +1,32 @@
-const crypto = require('crypto')
-const Dropbox = require('dropbox').Dropbox
-const fetch = require('node-fetch')
-
-function generateRandomString() {
-    return crypto.randomBytes(16).toString('hex')
-}
-
-function getRedirectUrl(request) {
-    return `${request.headers['x-forwarded-proto']}://${request.headers.host}/auth`
-}
-
-// Dropbox authentication URL should be requested with code instead of token
-// for non-implicit grants
-// https://www.dropboxforum.com/t5/API-Support-Feedback/How-to-authenticate-with-a-Dropbox-account-via-oauth2-from-my/m-p/335761/highlight/true#M19570
-const AUTH_TYPE = 'code'
+const cookie = require('../lib/cookie')
+const dropbox = require('../lib/dropbox-instance')
+const errorPage = require('../lib/error-page')
+const redirectUrl = require('../lib/redirect-url')
+const randomString = require('../lib/random-string')
+const { cookies, redirects } = require('../lib/constants')
 
 module.exports = (request, response) => {
-    const dropbox = new Dropbox({
-        fetch,
-        clientId: process.env.DROPBOX_APP_KEY,
-        clientSecret: process.env.DROPBOX_APP_SECRET,
-    })
-
-    const token = request.cookies.access_token
-
+    const token = request.cookies[cookies.TOKEN]
     if (token) {
         response.writeHead(302, {
-            'Set-Cookie': `state=deleted; HttpOnly; SameSite=Lax; expires=Thu, 01 Jan 1970 00:00:00 GMT`
+        	Location: redirects.DEFAULT,
+            'Set-Cookie': cookie.clear(cookies.STATE)
         })
-        response.end('got token')
+        response.end()
     } else {
-        const state = generateRandomString()
-        const authUrl = dropbox.getAuthenticationUrl(
-            getRedirectUrl(request),
-            state,
-            AUTH_TYPE
-        )
-        response.writeHead(302, {
-            Location: authUrl,
-            'Set-Cookie': `state=${state}; HttpOnly; SameSite=Lax` // add Secure for prod?
-        })
-        response.end('Redirecting to Dropbox...')
+    	try {
+	        const state = randomString()
+	        const authUrl = dropbox.getAuthenticationUrl(redirectUrl(request), state, 'code')
+	        response.writeHead(302, {
+	            Location: authUrl,
+	            'Set-Cookie': cookie.set(cookies.STATE, state)
+	        })
+	        response.end()
+		} catch (error) {
+			response.writeHead(error.status || 500, {
+				'Set-Cookie': cookie.clear(cookies.TOKEN)
+			})
+			response.end(errorPage(error.error && error.error.error_description || errors.UNKNOWN))
+		}
     }
 }
