@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "dropbox": "^4.0.30",
+    "js-cookie": "^2.2.1",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
@@ -28,6 +29,7 @@
     "now": "^16.7.0",
     "npm-run-all": "^4.1.5",
     "rollup": "^1.27.13",
+    "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-css-only": "^2.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.1.1",
