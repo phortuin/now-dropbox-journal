@@ -6,10 +6,27 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta name="description" content="Journal">
 	<title>Journal</title>
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+	<link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="/splash-640x1136.png">
+	<link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)" href="/splash-1242x2208.png">
+	<link rel="icon" href="/icons/icon-192x192.png">
+	<link rel="apple-touch-icon" href="/icons/icon-192x192.png">
 	<link rel="stylesheet" href="/styles.css">
+	<link rel="manifest" href="/manifest.json">
 	<script src="/bundle.js" defer></script>
 </head>
 <body>
 	<main role="main"></main>
+	<script>
+		if ('serviceWorker' in navigator) {
+			window.addEventListener('load', () => {
+				navigator.serviceWorker.register('/service-worker.js')
+					.then(registration => registration.update())
+					.catch(console.error)
+			});
+		}
+	</script>
 </body>
 </html>
