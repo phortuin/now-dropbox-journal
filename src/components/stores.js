@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store'
-import { cookies, storageTypes } from '../../lib/constants'
+import { cookies, localStorageItems, storageTypes } from '../../lib/constants'
 import Cookies from 'js-cookie'
 
 const stores = {
@@ -36,5 +36,7 @@ function createPersistentWritable(type, key, defaultValue = null) {
 }
 
 export const activeRoute = writable('/')
+export const entry = createPersistentWritable(storageTypes.LOCAL_STORAGE, localStorageItems.ENTRY, '')
+export const date = createPersistentWritable(storageTypes.LOCAL_STORAGE, localStorageItems.DATE, new Date().toISOString().substring(0, 10))
 export const fileLocation = createPersistentWritable(storageTypes.COOKIE, cookies.FILE_LOCATION)
 export const prepend = createPersistentWritable(storageTypes.COOKIE, cookies.PREPEND, '1')
