@@ -1,13 +1,15 @@
 <script>
 	import router from './router.js'
-	import View from './view.svelte'
-	import Home from '../views/home.svelte'
-	import Login from '../views/login.svelte'
-	import Settings from '../views/settings.svelte'
+	import Header from './header.svelte'
+	import Route from './route.svelte'
+	import Editor from './editor.svelte'
+	import Login from './login.svelte'
+	import Settings from './settings.svelte'
 
 	router.start()
 </script>
 
-<View path="/" component={ Home } />
-<View path="/login" component={ Login } />
-<View path="/settings" component={ Settings } />
+<Header />
+<Route path="/" component={ Editor } />
+<Route path="/login" component={ Login } />
+<Route path="/settings" component={ Settings } />
