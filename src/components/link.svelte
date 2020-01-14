@@ -3,7 +3,7 @@
 	let props
 
 	function handleClick(event) {
-		const path = event.target.pathname
+		const path = event.currentTarget.pathname
 		router.redirect(path)
 	}
 
