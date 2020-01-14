@@ -12,8 +12,8 @@ module.exports = async (request, response) => {
 		} else {
 			try {
 				let file = await dropbox.filesDownload({ path })
-				let body = file.fileBinary.toString('utf-8')
-				response.json({ body })
+				let content = file.fileBinary.toString('utf-8')
+				response.end(content)
 			} catch (error) {
 				// Dropbox error messages are unreliable; the filesDownload method seems to
 				// return a string on the error property. Node errors can be cast toString()
