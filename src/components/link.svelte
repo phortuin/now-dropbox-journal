@@ -16,6 +16,12 @@
 	export let href
 </script>
 
+<style>
+	.link--white {
+		color: white;
+	}
+</style>
+
 <a href={href} {...props} on:click|preventDefault={ handleClick }>
 	<slot />
 </a>
