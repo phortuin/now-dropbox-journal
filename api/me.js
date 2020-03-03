@@ -4,10 +4,9 @@ const { cookies, errors } = require('../lib/constants')
 module.exports = async (request, response) => {
 	const token = request.cookies[cookies.TOKEN]
 	if (token) {
-		dropbox.setAccessToken(token)
+		dropbox.setToken(token)
 		try {
-			const user = await dropbox.usersGetCurrentAccount()
-			response.json({ user })
+			response.json(await dropbox.user())
 		} catch (error) {
 			response.status(error.status || 500)
 			response.json({ error: error.error.error_description || error.error || errors.UNKNOWN })

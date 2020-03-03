@@ -20,7 +20,7 @@ module.exports = async (request, response) => {
 	}
 
 	try {
-		const token = await dropbox.getAccessTokenFromCode(redirectUrl(request), code)
+		const token = await dropbox.getToken(redirectUrl(request), code)
 		response.writeHead(302, {
 			Location: redirects.DEFAULT,
 			'Set-Cookie': cookie.set(cookies.TOKEN, token)

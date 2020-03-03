@@ -3,7 +3,7 @@ const dropbox = require('../lib/dropbox-instance')
 const errorPage = require('../lib/error-page')
 const redirectUrl = require('../lib/redirect-url')
 const randomString = require('../lib/random-string')
-const { cookies, redirects } = require('../lib/constants')
+const { cookies, redirects, errors } = require('../lib/constants')
 
 module.exports = (request, response) => {
 	const token = request.cookies[cookies.TOKEN]
@@ -16,7 +16,7 @@ module.exports = (request, response) => {
 	} else {
 		try {
 			const state = randomString()
-			const authUrl = dropbox.getAuthenticationUrl(redirectUrl(request), state, 'code')
+			const authUrl = dropbox.authUrl(redirectUrl(request), state)
 			response.writeHead(302, {
 				Location: authUrl,
 				'Set-Cookie': cookie.set(cookies.STATE, state)

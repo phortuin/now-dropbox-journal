@@ -1,5 +1,4 @@
 const dropbox = require('../lib/dropbox-instance')
-const dropboxFileContents = require('../lib/dropbox-file-contents')
 const { isInvalidDate } = require('../lib/date-validator')
 const { cookies, errors } = require('../lib/constants')
 
@@ -20,7 +19,7 @@ function addEntryToJournal(prepend, { journal, entry, date }) {
 module.exports = async (request, response) => {
 	const token = request.cookies[cookies.TOKEN]
 	if (token) {
-		dropbox.setAccessToken(token)
+		dropbox.setToken(token)
 		const path = request.cookies[cookies.FILE_LOCATION]
 		const prepend = request.cookies[cookies.PREPEND]
 			? !!request.cookies[cookies.PREPEND]
@@ -32,14 +31,10 @@ module.exports = async (request, response) => {
 		} else {
 			try {
 				const contents = addEntryToJournal(prepend, {
-					journal: await dropboxFileContents(dropbox, path),
+					journal: await dropbox.contents(path),
 					...request.body
 				})
-				await dropbox.filesUpload({
-					contents,
-					path,
-					mode: 'overwrite'
-				})
+				await dropbox.save(contents, path)
 				response.end(contents)
 			} catch (error) {
 				// Dropbox error messages are unreliable; the filesDownload method seems to
