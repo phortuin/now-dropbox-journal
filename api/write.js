@@ -1,3 +1,4 @@
+const middleware = require('../lib/middleware')
 const dropbox = require('../lib/dropbox-instance')
 const { isInvalidDate } = require('../lib/date-validator')
 const { cookies, errors } = require('../lib/constants')
@@ -16,35 +17,28 @@ function addEntryToJournal(prepend, { journal, entry, date }) {
 		`${journal}\n\n${dateString}\n\n${entry}`
 }
 
-module.exports = async (request, response) => {
-	const token = request.cookies[cookies.TOKEN]
-	if (token) {
-		dropbox.setToken(token)
-		const path = request.cookies[cookies.FILE_LOCATION]
-		const prepend = request.cookies[cookies.PREPEND]
-			? !!request.cookies[cookies.PREPEND]
-			: true
+module.exports = middleware.authenticate(async (request, response) => {
+	const path = request.cookies[cookies.FILE_LOCATION]
+	const prepend = request.cookies[cookies.PREPEND]
+		? !!request.cookies[cookies.PREPEND]
+		: true
 
-		if (!path) {
-			response.status(400)
-			response.json({ error: errors.UNKNOWN_PATH })
-		} else {
-			try {
-				const contents = addEntryToJournal(prepend, {
-					journal: await dropbox.contents(path),
-					...request.body
-				})
-				await dropbox.save(contents, path)
-				response.end(contents)
-			} catch (error) {
-				// Dropbox error messages are unreliable; the filesDownload method seems to
-				// return a string on the error property. Node errors can be cast toString()
-				response.status(error.status || 500)
-				response.json({ error: error.error || error.toString() || errors.UNKNOWN })
-			}
-		}
+	if (!path) {
+		response.status(400)
+		response.json({ error: errors.UNKNOWN_PATH })
 	} else {
-		response.status(403)
-		response.json({ error: errors.NOT_AUTHENTICATED })
+		try {
+			const contents = addEntryToJournal(prepend, {
+				journal: await dropbox.contents(path),
+				...request.body
+			})
+			await dropbox.save(contents, path)
+			response.end(contents)
+		} catch (error) {
+			// Dropbox error messages are unreliable; the filesDownload method seems to
+			// return a string on the error property. Node errors can be cast toString()
+			response.status(error.status || 500)
+			response.json({ error: error.error || error.toString() || errors.UNKNOWN })
+		}
 	}
-}
+})
