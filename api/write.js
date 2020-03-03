@@ -1,4 +1,5 @@
 const dropbox = require('../lib/dropbox-instance')
+const dropboxFileContents = require('../lib/dropbox-file-contents')
 const { isInvalidDate } = require('../lib/date-validator')
 const { cookies, errors } = require('../lib/constants')
 
@@ -30,9 +31,8 @@ module.exports = async (request, response) => {
 			response.json({ error: errors.UNKNOWN_PATH })
 		} else {
 			try {
-				const file = await dropbox.filesDownload({ path })
 				const contents = addEntryToJournal(prepend, {
-					journal: file.fileBinary.toString('utf8'),
+					journal: await dropboxFileContents(dropbox, path),
 					...request.body
 				})
 				await dropbox.filesUpload({

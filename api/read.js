@@ -1,4 +1,5 @@
 const dropbox = require('../lib/dropbox-instance')
+const dropboxFileContents = require('../lib/dropbox-file-contents')
 const { cookies, errors } = require('../lib/constants')
 
 module.exports = async (request, response) => {
@@ -11,9 +12,7 @@ module.exports = async (request, response) => {
 			response.json({ error: errors.UNKNOWN_PATH })
 		} else {
 			try {
-				let file = await dropbox.filesDownload({ path })
-				let content = file.fileBinary.toString('utf-8')
-				response.end(content)
+				response.end(await dropboxFileContents(dropbox, path))
 			} catch (error) {
 				// Dropbox error messages are unreliable; the filesDownload method seems to
 				// return a string on the error property. Node errors can be cast toString()
