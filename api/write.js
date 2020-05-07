@@ -1,17 +1,22 @@
 const middleware = require('../lib/middleware')
 const dropbox = require('../lib/dropbox-instance')
 const { isInvalidDate } = require('../lib/date-validator')
-const { cookies, errors } = require('../lib/constants')
+const { cookies, errors, dateFormats } = require('../lib/constants')
 
-function getDateString(date) {
+function getDateString(date, dateFormat) {
 	if (isInvalidDate(date)) {
 		date = new Date()
 	}
-	return `${date.getDate()}/${date.getMonth()+1}`
+	const dateMap = {
+		'd': date.getDate(),
+		'm': date.getMonth() + 1,
+		'y': date.getFullYear(),
+	}
+	return [...dateFormat].map(letter => dateMap[letter]).join('/')
 }
 
-function addEntryToJournal(prepend, { journal, entry, date }) {
-	const dateString = getDateString(new Date(date))
+function addEntryToJournal(prepend, dateFormat, { journal, entry, date }) {
+	const dateString = getDateString(new Date(date), dateFormat)
 	return prepend ?
 		`${dateString}\n\n${entry}\n\n${journal}` :
 		`${journal}\n\n${dateString}\n\n${entry}`
@@ -22,13 +27,15 @@ module.exports = middleware.authenticate(async (request, response) => {
 	const prepend = request.cookies[cookies.PREPEND]
 		? !!request.cookies[cookies.PREPEND]
 		: true
+	const dateFormat = request.cookies[cookies.DATE_FORMAT]
+		|| dateFormats.DAY_MONTH
 
 	if (!path) {
 		response.status(400)
 		response.json({ error: errors.UNKNOWN_PATH })
 	} else {
 		try {
-			const contents = addEntryToJournal(prepend, {
+			const contents = addEntryToJournal(prepend, dateFormat, {
 				journal: await dropbox.contents(path),
 				...request.body
 			})
