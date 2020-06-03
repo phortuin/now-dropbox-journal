@@ -9,7 +9,7 @@
 	}
 	div {
 		position: fixed;
-		z-index: 1;
+		z-index: 2;
 		background: hsl(196, 100%, 47%);
 		width: 100vw;
 		transform: translateY(0);
@@ -19,11 +19,15 @@
 	div.closed {
 		transform: translateY(-100%);
 	}
+	.button--sticky {
+		position: fixed;
+		z-index: 1;
+	}
 </style>
 
 <nav>
 	<button
-		class="button--round"
+		class="button--sticky button--round"
 		on:click|preventDefault={ () => openMenu = true }>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +76,14 @@
 				<Link
 					href="/"
 					class="link--white">
-					Home
+					New entry
+				</Link>
+			</li>
+			<li>
+				<Link
+					href="/editall"
+					class="link--white">
+					Edit all
 				</Link>
 			</li>
 		</ul>

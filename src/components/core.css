@@ -53,14 +53,15 @@ h1 {
 
 button,
 textarea,
-input[type=text] {
+input[type=text],
+input[type=date] {
 	-webkit-appearance: none;
 }
 
 textarea {
 	margin: 0 auto;
 	padding: 1rem;
-	width: 100vw;
+	width: 100%;
 	max-width: 32rem;
 	font-size: 1em;
 	border: 0;
@@ -75,11 +76,6 @@ textarea {
 	margin: 0;
 	padding: 0;
 	list-style: none;
-}
-
-nav {
-	padding: .5rem;
-	background: #00aeef;
 }
 
 nav a {
@@ -105,4 +101,53 @@ button,
 button:active,
 .button:active {
 	background: hsl(196, 100%, 60%);
+}
+
+.button--round {
+	display: flex;
+	width: 2rem;
+	height: 2rem;
+	padding: 0;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+}
+
+.button--inverted {
+	background: white;
+}
+
+.icon {
+	fill: white;
+}
+
+.button--inverted .icon {
+	fill: hsl(196, 100%, 47%);
+}
+
+.a11y-sr-only {
+  overflow: hidden;
+  position: absolute;
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  clip: rect(0 0 0 0);
+}
+
+.flat-list {
+	list-style: none;
+	margin: 1rem 0 0;
+	padding: 0;
+}
+
+.flat-list li {
+	font-size: 2em;
+	margin: 0 0 0.5rem;
+	text-align: center;
+}
+
+form {
+	margin-top: 2rem;
 }
