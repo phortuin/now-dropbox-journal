@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "ncp": "^2.0.0",
-    "now": "^16.7.0",
+    "now": "^19.0.0",
     "npm-run-all": "^4.1.5",
     "rollup": "^1.27.13",
     "rollup-plugin-commonjs": "^10.1.0",
