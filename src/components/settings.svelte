@@ -1,30 +1,11 @@
 <script>
 	import { fileLocation, prepend, dateFormat } from '../components/stores.js'
 	import { dateFormats } from '../../lib/constants'
-	import Link from '../components/link.svelte'
-	import router from '../components/router.js'
-	import Cookies from 'js-cookie'
-
-	let user = '…'
-
-	fetch('api/me')
-		.then(response => response.json())
-		.then(data => {
-			user = data.name.display_name
-		})
-
-	function handleSubmit() {
-		// noop; users just want to store settings
-		setTimeout(() => {
-			alert('settings saved')
-		}, 200)
-	}
 </script>
 
 <h1>Settings</h1>
-<p>Welkom terug { user }</p>
 
-<form on:submit|preventDefault={ handleSubmit }>
+<form>
 	<div>
 		File location:<br>
 		<input type="text" bind:value={$fileLocation}>
@@ -55,6 +36,5 @@
 			Long date format (31/3/2019)
 		</label>
 	</div>
-	<br>
-	<button>Save settings</button>
+	<small>Settings are stored automatically</small>
 </form>
