@@ -1,6 +1,5 @@
 <script>
 	import { onMount } from 'svelte'
-	import { entry } from './stores.js'
 	import router from './router.js'
 
 	export let journal = 'Loading journal...'
@@ -24,12 +23,7 @@
 </script>
 
 <style>
-	article {
-		padding: 1rem 1rem 2rem;
-		background: #f7f7f7;
-		font-size: 14px;
-		min-height: 100vh;
-	}
+
 </style>
 
 <article>
