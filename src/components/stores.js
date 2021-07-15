@@ -17,7 +17,10 @@ const stores = {
 			return safeJsonParse(item)
 		},
 		setItem(key, value) {
-			Cookies.set(key, JSON.stringify(value), { expires: 365, path: '/' })
+			if (typeof value === 'object') {
+				value = JSON.stringify(value)
+			}
+			Cookies.set(key, value, { expires: 365, path: '/' })
 		}
 	},
 	[storageTypes.LOCAL_STORAGE]: {
