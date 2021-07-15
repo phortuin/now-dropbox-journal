@@ -1,11 +1,10 @@
 <script>
 	import { afterUpdate } from 'svelte'
 
-
 	export let content
 	let textarea
 
-	afterUpdate(() => resizeTextarea())
+	afterUpdate(resizeTextarea)
 
 	function resizeTextarea() {
 		textarea.style.height = 'auto'
