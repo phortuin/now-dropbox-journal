@@ -6,6 +6,7 @@
 	import Login from './login.svelte'
 	import Settings from './settings.svelte'
 	import Editall from './editall.svelte'
+	import Account from './account.svelte'
 
 	router.start()
 </script>
@@ -14,4 +15,5 @@
 <Route path="/" component={ Editor } />
 <Route path="/login" component={ Login } />
 <Route path="/settings" component={ Settings } />
+<Route path="/account" component={ Account } />
 <Route path="/editall" component={ Editall } />
