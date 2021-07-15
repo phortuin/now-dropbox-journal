@@ -1,14 +1,14 @@
 {
-  "name": "now-dropbox-journal",
+  "name": "dropbox-journal",
   "version": "1.0.0",
   "description": "Dropbox text file based journal",
   "license": "MIT",
-  "homepage": "https://github.com/phortuin/now-dropbox-journal",
+  "homepage": "https://github.com/phortuin/dropbox-journal",
   "author": {
     "name": "Anne Fortuin",
     "url": "phortuin.nl"
   },
-  "repository": "phortuin/now-dropbox-journal",
+  "repository": "phortuin/dropbox-journal",
   "main": "index.js",
   "engines": {
     "node": ">=8"
@@ -17,7 +17,7 @@
     "build": "run-s build:*",
     "build:js": "rollup --config",
     "build:static": "ncp src/static public",
-    "dev:now": "now dev --listen 3031"
+    "dev:vercel": "vercel dev --listen 3031"
   },
   "dependencies": {
     "dropbox": "^4.0.30",
@@ -26,13 +26,13 @@
   },
   "devDependencies": {
     "ncp": "^2.0.0",
-    "now": "^19.0.0",
     "npm-run-all": "^4.1.5",
     "rollup": "^1.27.13",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-css-only": "^2.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.1.1",
-    "svelte": "^3.16.5"
+    "svelte": "^3.16.5",
+    "vercel": "^23.0.1"
   }
 }
