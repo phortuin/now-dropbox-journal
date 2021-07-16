@@ -3,7 +3,7 @@ const dropbox = require('../lib/dropbox-instance')
 const errorPage = require('../lib/error-page')
 const redirectUrl = require('../lib/redirect-url')
 const { errors, cookies, redirects, queryParams } = require('../lib/constants')
-const { createUserSession } = require('../lib/redis-instance')
+const { createUserSession } = require('../lib/session')
 
 module.exports = async (request, response) => {
 	const code = request.query[queryParams.CODE]
