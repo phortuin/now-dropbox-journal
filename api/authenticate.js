@@ -6,8 +6,8 @@ const randomString = require('../lib/random-string')
 const { cookies, redirects, errors } = require('../lib/constants')
 
 module.exports = (request, response) => {
-	const token = request.cookies[cookies.TOKEN]
-	if (token) {
+	const sessionId = request.cookies[cookies.SESSION_ID]
+	if (sessionId) {
 		response.writeHead(302, {
 			Location: redirects.DEFAULT,
 			'Set-Cookie': cookie.clear(cookies.STATE)
@@ -24,7 +24,7 @@ module.exports = (request, response) => {
 			response.end()
 		} catch (error) {
 			response.writeHead(error.status || 500, {
-				'Set-Cookie': cookie.clear(cookies.TOKEN)
+				'Set-Cookie': cookie.clear(cookies.SESSION_ID)
 			})
 			response.end(errorPage(error.error && error.error.error_description || errors.UNKNOWN))
 		}
