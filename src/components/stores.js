@@ -82,6 +82,3 @@ function createPersistentWritable(type, key, defaultValue = null) {
 export const activeRoute = writable('/')
 export const entry = createPersistentWritable(storageTypes.LOCAL_STORAGE, localStorageItems.ENTRY, '')
 export const date = createPersistentWritable(storageTypes.LOCAL_STORAGE, localStorageItems.DATE, new Date().toISOString().substring(0, 10))
-export const fileLocation = createPersistentWritable(storageTypes.COOKIE, cookies.FILE_LOCATION)
-export const prepend = createPersistentWritable(storageTypes.COOKIE, cookies.PREPEND, '1')
-export const dateFormat = createPersistentWritable(storageTypes.COOKIE, cookies.DATE_FORMAT, dateFormats.DAY_MONTH)
