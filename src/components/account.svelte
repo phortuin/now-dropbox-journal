@@ -5,7 +5,7 @@
 	let avatar = 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-256.png'
 
 	function handleClick() {
-		fetch('/api/logout', { method: 'post' })
+		fetch('/api/auth/logout', { method: 'post' })
 			.then(response => {
 				if (response.ok) {
 					window.location.reload()

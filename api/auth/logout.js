@@ -1,6 +1,6 @@
-const cookie = require('../lib/cookie')
-const { cookies } = require('../lib/constants')
-const { deleteUserSession } = require('../lib/session')
+const cookie = require('../../lib/cookie')
+const { cookies } = require('../../lib/constants')
+const { deleteUserSession } = require('../../lib/session')
 
 module.exports = async (request, response) => {
 	if (request.method === 'POST') {

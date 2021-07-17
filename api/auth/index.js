@@ -1,9 +1,9 @@
-const cookie = require('../lib/cookie')
-const dropbox = require('../lib/dropbox-instance')
-const errorPage = require('../lib/error-page')
-const redirectUrl = require('../lib/redirect-url')
-const randomString = require('../lib/random-string')
-const { cookies, redirects, errors } = require('../lib/constants')
+const cookie = require('../../lib/cookie')
+const dropbox = require('../../lib/dropbox-instance')
+const errorPage = require('../../lib/error-page')
+const redirectUrl = require('../../lib/redirect-url')
+const randomString = require('../../lib/random-string')
+const { cookies, redirects, errors } = require('../../lib/constants')
 
 module.exports = (request, response) => {
 	const sessionId = request.cookies[cookies.SESSION_ID]
