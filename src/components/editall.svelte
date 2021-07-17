@@ -9,7 +9,7 @@
 	async function handleSubmit(event) {
 		saving = true
 		const form = event.target
-		const method = form.method
+		const method = 'put' // cant put 'put' in form action :/
 		const action = form.action
 		const response = await fetch(action,
 		{
@@ -27,7 +27,7 @@
 	}
 
 	onMount(async () => {
-		journal = await fetch(`/api/read`).then(response => {
+		journal = await fetch(`/api/journal`).then(response => {
 			const status = response.status
 			if (status !== 200) {
 				if (status === 409 || status === 400) {
@@ -100,8 +100,9 @@
 <form
 	id="theform"
 	method="post"
-	action="/api/writeall"
+	action="/api/journal"
 	on:submit|preventDefault={ handleSubmit }>
+	<input type="hidden" name="_method" value="put">
 
 	<Textarea
 		bind:content={ journal } />

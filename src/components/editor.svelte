@@ -69,7 +69,7 @@
 <form
 	id="theform"
 	method="post"
-	action="/api/write"
+	action="/api/journal"
 	on:submit|preventDefault={ handleSubmit }>
 
 	<label

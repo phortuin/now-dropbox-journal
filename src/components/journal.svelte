@@ -5,7 +5,7 @@
 	export let journal = 'Loading journal...'
 
 	onMount(async () => {
-		journal = await fetch(`/api/read`).then(response => {
+		journal = await fetch(`/api/journal`).then(response => {
 			const status = response.status
 			if (status !== 200) {
 				if (status === 409 || status === 400) {
