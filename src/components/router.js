@@ -17,7 +17,7 @@ const router = {
 }
 
 activeRoute.subscribe(path => {
-	if (path !== '/login' && !Cookies.get('access_token')) {
+	if (path !== '/login' && !Cookies.get('session_id')) {
 		redirect('/login')
 	}
 })
